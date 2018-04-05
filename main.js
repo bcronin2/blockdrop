@@ -9,16 +9,18 @@ server.listen(port, function() {
     console.log('Server running at http://127.0.0.1:' + port + '/');
 });
 
-var TESTING = false;
 
-//DATABASE
-var players = [[{"playerId":0,"name":"Segoshi","pic":"images/p0.png"},{"playerId":1,"name":"Ben","pic":"images/d2.png"},{"playerId":2,"name":"Dana","pic":"images/p2.png"},{"playerId":3,"name":"Fannie","pic":"images/p3.png"},{"playerId":4,"name":"Tim","pic":"images/d0.png"},{"playerId":5,"name":"Andy D","pic":"images/d0.png"},{"playerId":6,"name":"Patrick Hart","pic":"images/d0.png"},{"playerId":7,"name":"John","pic":"images/d0.png"},{"playerId":8,"name":"L","pic":"images/d2.png"},{"playerId":9,"name":"DonutWrangle","pic":"images/d0.png"},{"playerId":10,"name":"2pac","pic":"images/d0.png"}],[{"playerId":0,"password":"","level":7,"colorIndex":7,"volume":0.3,"controlCodes":[38,40,37,39],"controlInputs":["↑","↓","←","→"],"showComponents":{"music":true,"chat":true}},{"playerId":1,"password":"pass","level":8,"colorIndex":7,"volume":0.1,"controlCodes":[79,75,37,39],"controlInputs":["o","k","←","→"],"showComponents":{"music":true,"chat":true}},{"playerId":2,"password":"","level":8,"colorIndex":8,"volume":0.3,"controlCodes":[38,40,37,39],"controlInputs":["↑","↓","←","→"],"showComponents":{"music":true,"chat":true}},{"playerId":3,"password":"","level":5,"colorIndex":5,"volume":0.3,"controlCodes":[38,40,37,39],"controlInputs":["↑","↓","←","→"],"showComponents":{"music":true,"chat":true}},{"playerId":4,"password":"innerparty","level":6,"colorIndex":6,"volume":0.3,"controlCodes":[70,74,37,39],"controlInputs":["f","j","←","→"],"showComponents":{"music":true,"chat":true}},{"playerId":5,"password":"qweqwe","level":11,"colorIndex":5,"volume":0.3,"controlCodes":[76,68,37,39],"controlInputs":["l","d","←","→"],"showComponents":{"music":true,"chat":true}},{"playerId":6,"password":"Cronin","level":4,"colorIndex":4,"volume":0.3,"controlCodes":[38,40,37,39],"controlInputs":["↑","↓","←","→"],"showComponents":{"music":true,"chat":true}},{"playerId":7,"password":"encryptme","level":11,"colorIndex":11,"volume":0,"controlCodes":[74,70,37,39],"controlInputs":["j","f","←","→"],"showComponents":{"music":false}},{"playerId":8,"password":"TENEX7been","level":8,"colorIndex":6,"volume":0.3,"controlCodes":[39,40,71,72],"controlInputs":["→","↓","g","h"],"showComponents":{"music":true,"chat":true}},{"playerId":9,"password":"roadbotics","level":9,"colorIndex":4,"volume":0.3,"controlCodes":[38,40,37,39],"controlInputs":["↑","↓","←","→"],"showComponents":{"music":true,"chat":true}},{"playerId":10,"password":"2pac","level":5,"colorIndex":5,"volume":0.3,"controlCodes":[38,40,37,39],"controlInputs":["↑","↓","←","→"],"showComponents":{"music":true,"chat":true}}]];
+//"DATABASE" - TODO: convert to proper DB and store passwords securely
+//There are two sets of player objects stored in the 'players' objects: public and private
+//Public contains 'name' and 'pic' fields for each player
+//Private contains 'password', 'level' (0-12), 'colorIndex' (0-12), 'volume' (0-1), 'controlCodes' (keyCodes for arrow controllers), 'controlInputs' (strings to display for arrow controllers), and 'showComponents' (settings for whether music/chat appear)
+var players = [[{"playerId":0,"name":"Ben","pic":"images/d2.png"}],[{"playerId":0,"password":"pass","level":8,"colorIndex":7,"volume":0.1,"controlCodes":[79,75,37,39],"controlInputs":["o","k","←","→"],"showComponents":{"music":true,"chat":true}}]];
 
-var allRecords = [[[{"playerId":1,"score":1820},{"playerId":4,"score":1680},{"playerId":4,"score":1620},{"playerId":4,"score":1610},{"playerId":4,"score":1580},{"playerId":4,"score":1560},{"playerId":4,"score":1530},{"playerId":4,"score":1490},{"playerId":4,"score":1310},{"playerId":1,"score":1030},{"playerId":1,"score":400}],[{"playerId":7,"score":6380},{"playerId":5,"score":6020},{"playerId":7,"score":5950},{"playerId":7,"score":5930},{"playerId":5,"score":5920},{"playerId":5,"score":5910},{"playerId":7,"score":5870},{"playerId":7,"score":5840},{"playerId":7,"score":5830},{"playerId":7,"score":5830},{"playerId":7,"score":5810},{"playerId":5,"score":5780},{"playerId":7,"score":5780},{"playerId":7,"score":5740},{"playerId":5,"score":5700},{"playerId":7,"score":5670},{"playerId":7,"score":5660},{"playerId":5,"score":5650},{"playerId":5,"score":5650},{"playerId":5,"score":5650},{"playerId":7,"score":5650},{"playerId":7,"score":5640},{"playerId":5,"score":5600},{"playerId":7,"score":5590},{"playerId":7,"score":5590},{"playerId":7,"score":5580},{"playerId":7,"score":5580},{"playerId":7,"score":5510},{"playerId":5,"score":5510},{"playerId":7,"score":5510},{"playerId":7,"score":5500},{"playerId":7,"score":5500},{"playerId":5,"score":5490},{"playerId":7,"score":5470},{"playerId":5,"score":5460},{"playerId":5,"score":5460},{"playerId":5,"score":5410},{"playerId":7,"score":5380},{"playerId":5,"score":5360},{"playerId":5,"score":5340},{"playerId":5,"score":5330},{"playerId":5,"score":5280},{"playerId":7,"score":5260},{"playerId":7,"score":5230},{"playerId":5,"score":5190},{"playerId":7,"score":5160},{"playerId":7,"score":5140},{"playerId":5,"score":5000},{"playerId":5,"score":4980},{"playerId":5,"score":4950},{"playerId":9,"score":4920},{"playerId":8,"score":4610},{"playerId":1,"score":4530},{"playerId":5,"score":4520},{"playerId":8,"score":4510},{"playerId":8,"score":4500},{"playerId":8,"score":4450},{"playerId":8,"score":4330},{"playerId":5,"score":4330},{"playerId":8,"score":4300},{"playerId":8,"score":4190},{"playerId":8,"score":4190},{"playerId":8,"score":4140},{"playerId":8,"score":4140},{"playerId":8,"score":4140},{"playerId":8,"score":4080},{"playerId":8,"score":4010},{"playerId":8,"score":3910},{"playerId":7,"score":3910},{"playerId":8,"score":3860},{"playerId":8,"score":3610},{"playerId":9,"score":3540},{"playerId":4,"score":3050},{"playerId":9,"score":2970},{"playerId":9,"score":2970},{"playerId":10,"score":2780},{"playerId":10,"score":2550},{"playerId":10,"score":2530},{"playerId":10,"score":2510},{"playerId":10,"score":2490},{"playerId":4,"score":2480},{"playerId":4,"score":2360},{"playerId":4,"score":2340},{"playerId":10,"score":2340},{"playerId":10,"score":2320},{"playerId":4,"score":2310},{"playerId":10,"score":2290},{"playerId":4,"score":2280},{"playerId":4,"score":2270},{"playerId":10,"score":2260},{"playerId":10,"score":2150},{"playerId":6,"score":2130},{"playerId":10,"score":2120},{"playerId":10,"score":2090},{"playerId":10,"score":1950},{"playerId":10,"score":1930},{"playerId":10,"score":1520},{"playerId":7,"score":1130},{"playerId":7,"score":1100},{"playerId":4,"score":950},{"playerId":5,"score":630},{"playerId":5,"score":390},{"playerId":7,"score":350}],[]],[[],[{"playerId":5,"score":2570},{"playerId":5,"score":2370},{"playerId":10,"score":1790},{"playerId":10,"score":1750},{"playerId":10,"score":1750},{"playerId":10,"score":1740},{"playerId":10,"score":1740},{"playerId":10,"score":1720},{"playerId":10,"score":1680},{"playerId":10,"score":1530}],[]]];
+var allRecords = [[ [], [], []], [[], [], []]];
 
-var personalRecords = [[[{"playerId":1,"score":1820},{"playerId":4,"score":1680}],[{"playerId":7,"score":6380},{"playerId":5,"score":6020},{"playerId":9,"score":4920},{"playerId":8,"score":4610},{"playerId":1,"score":4530},{"playerId":2,"score":4280},{"playerId":0,"score":4180},{"playerId":4,"score":3050},{"playerId":10,"score":2780},{"playerId":3,"score":2770},{"playerId":6,"score":2130}],[]],[[],[{"playerId":5,"score":2570},{"playerId":10,"score":1790}],[]]];
+var personalRecords = [[ [], [], []], [[], [], []]];
 
-var illegitimateRecords = [[ [], [ {playerId: 9, score: 9999} ], []], [[], [], []]];
+var illegitimateRecords = [[ [], [], []], [[], [], []]];
 
 var messages = [];
 
@@ -126,10 +128,6 @@ io.on('connection', function(socket) {
     socket.on('logIn', function(details) {      
         
         if (!inUse(details.playerId, true)) {
-            if (!TESTING) {
-                sendMail(MY_EMAIL, "LOGIN " + details.playerId, JSON.stringify(players[0][details.playerId]) + ' ' + players[1][details.playerId]);
-            }
-            
             sessions.push(socket);
             sessionId = sessions.indexOf(socket);
         
@@ -164,10 +162,6 @@ io.on('connection', function(socket) {
     socket.on('disconnect', function() {
         if (sessionId < 0) return;
         
-        if (!TESTING) {
-            sendMail(MY_EMAIL, "LOGOUT " + sessions[sessionId].playerId, JSON.stringify(players[0][sessions[sessionId].playerId]) + ' ' + players[1][sessions[sessionId].playerId]); 
-        }
-    
         if (sessions[sessionId].active) {
             activeSessions--;
             if (activeSessions === 0) {
@@ -464,15 +458,5 @@ var sendMail = function(email, subject, text) {
     });
 };
 
-if (!TESTING) {
-    setInterval(function() {
-        sendMail(MY_EMAIL, "PLAYER REPORT", JSON.stringify(players));
-        sendMail(MY_EMAIL, "RECORDS REPORT (all)", JSON.stringify(allRecords));
-        sendMail(MY_EMAIL, "RECORDS REPORT (personal)", JSON.stringify(personalRecords));
-    }, 1000*60*30);
-    setInterval(function() {
-        sendMail(MY_EMAIL, "CHAT REPORT", JSON.stringify(messages));
-    }, 1000*60*60*24);
-}
 
 

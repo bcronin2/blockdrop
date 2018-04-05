@@ -8,10 +8,10 @@
     "nodemailer": "^4.0.1",
     "socket.io": "^2.0.3"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --nouse-idle-notification main.js"
   },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bcronin2/blockdrop.git"
