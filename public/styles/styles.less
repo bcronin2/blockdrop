@@ -1,0 +1,564 @@
+@font-face {
+    font-family: ARCADECLASSIC;
+    src: url("../fonts/ARCADECLASSIC.ttf");
+}
+
+@font-family-default: ARCADECLASSIC;
+@font-size-1: 16px;
+@font-size-2: 2*@font-size-1;
+@font-size-3: 3*@font-size-1;
+@font-size-4: 4*@font-size-1;
+@color-default: grey;
+@color-text: white;
+@color-select: silver;
+@color-alert: darkred; 
+@grey-1: lightgray;
+@grey-2: darkgray;
+@grey-3: grey;
+
+@width-modal: 320px;
+@default-dimension: 50px;
+@padding-near: 0.1*@default-dimension;
+@padding-far: 0.5*@default-dimension;
+@padding-near-flex: 2.5%;
+@padding-far-flex: 10%;
+@scale-select: 120%;
+
+
+html {
+    height: 100vh;
+} 
+body {
+    padding-right: 0px !important;
+    margin-right: 0px !important;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: @grey-1;
+}
+footer {
+    height: @default-dimension;
+    line-height: @default-dimension;
+    font-family: @font-family-default;
+    text-align: center;
+}
+h1, h2, h3, h4, h5, h6, p {
+    font-family: @font-family-default;
+    text-align: center;
+}
+p {
+    font-size: @font-size-1;
+    margin: 0;
+}
+input, textarea {
+    font-family: sans-serif;
+    font-size: @font-size-1;
+    color: @color-default;
+    resize: none;
+}
+input[type=range] {
+    width: 40%;
+}
+
+
+
+.jumbotron {
+    height: 2*@default-dimension;
+    padding: 0;
+    font-family: "ARCADECLASSIC";
+    font-size: @font-size-4;
+    text-align: center;
+    color: @color-text;
+}
+.title {
+    cursor: pointer;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1;
+    font-family: @font-family-default;
+    font-size: @font-size-3;
+}
+.menu-link {
+//    color: @color-main;
+    cursor: pointer;
+}
+.menu-link:hover {
+    color: @color-select;
+}
+.menu-link-dead {
+    color: @grey-2;
+}
+
+.content {
+    display: flex;
+    flex: 12;
+}
+
+#game-console {
+    display: flex;
+    flex-grow: 1; 
+}
+
+.left-side, .right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 @padding-near-flex;
+}
+
+.right-side {
+    text-align: center;
+}
+
+#game-panel {
+    .default-panel;
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+}
+
+#game-top {
+    font-size: @font-size-1;
+    height: @default-dimension;
+    display: flex;
+}
+
+#game-content {
+    flex: 12;
+    display: flex;
+}
+
+.player-frame {
+    flex: 1;
+    display: flex;
+    padding: 0 @padding-near-flex @padding-near-flex @padding-near-flex;
+}
+
+.player-content {
+    .default-panel;
+    flex: 1;
+    background-color: @grey-1;
+    display: flex;
+    flex-direction: column;
+}
+
+.streak-frame {
+    height: 10px;
+    border-radius: 0;
+    background-color: white;
+}
+
+.streak-progress {
+    height: 100%;
+//    background-color: @color-main;
+}
+
+.block-region {
+    display: flex;
+    justify-content: flex-start;
+    flex: 12;
+}
+.block-stack {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    align-items: center;
+    flex: 2;     
+}
+.block-icon {
+    margin: auto;
+    display: block;
+    color: @color-text;
+}
+.buffer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;    
+}
+.this {
+    border-width: 4px;
+//    color: @color-main;
+}
+.player-pic {
+    width: 60%;
+    box-sizing: border-box;
+    border-radius: 4*@padding-near;
+    padding: @padding-near-flex;
+}
+.default-panel {
+    text-align: center;
+    font-family: @font-family-default;
+    font-size: @font-size-2;
+    background-color: @grey-2;
+    border: double;
+    border-radius: 0;
+}
+.player-list {
+    .default-panel;
+    font-size: @font-size-1;
+    width: 25%;
+    position: relative;
+}
+.mobile-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+
+//CONTROLS
+.control-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.control-label {
+    flex: 1;
+    left: @padding-near;
+    font-family: @font-family-default;
+    font-size: @font-size-1;
+}
+.control-input {
+    flex: 1;
+}
+
+
+
+
+
+//RECORD 
+.record-container {
+    width: 100%;
+    display: flex;
+}
+.record-list {
+    flex: 2;
+}
+.record-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.2*@font-size-2;
+    color: @grey-3;
+    font-family: @font-family-default;
+    font-size: @font-size-2;
+    padding: @padding-near;
+    border: solid black;
+    border-width: 0px 2px 2px 2px;
+}
+.record-headers {
+    .record-entry;
+    color: black; 
+    border-width: 2px;
+}
+
+
+
+
+
+
+
+//SETTINGS
+.setting-container {
+    .record-container;
+}
+.setting-list {
+    .record-list;
+}
+.setting-entry {
+    .record-entry;
+    color: black;
+    height: @default-dimension;
+    border-width: 0;
+}
+.setting-value {
+    color: @grey-3;
+}
+.selectable-pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    height: 0.45*@default-dimension; 
+    width: 0.45*@default-dimension;
+    cursor: pointer;
+}
+.selected-pic {
+    border: solid;
+    border-width: 4px;
+}
+.checkbox-unit {
+    font-size: @font-size-2*0.8;
+    cursor: pointer;
+}
+.checkbox-box {
+    padding-left: 2*@padding-near;
+    padding-right: 0.5*@padding-near;
+}
+
+
+
+
+
+
+//MISCELLANY
+.modal-dialog,
+.modal-content {
+    width: @width-modal;
+    border-radius: 0;
+}
+
+.modal-open 
+.modal {
+    height: 80%;
+    width: @width-modal;
+    overflow-y: hidden;
+}
+.center {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -40%);
+    text-align: center;
+}
+.whole-page {
+    .center;
+    padding: @padding-far;
+    font-family: @font-family-default;
+    font-size: @font-size-4;
+    color: white;
+    background-color: @color-alert;
+}
+.urgent {
+    color: white;
+    background-color: red;
+}
+
+
+
+//BUTTON/SELECTION STYLES
+.clickable {
+    font-family: @font-family-default; 
+    color: @color-text;
+    border-radius: 0;
+    margin: auto;
+    cursor: pointer;
+}
+.clickable:focus {
+    color: @grey-2;
+}
+.clickable:hover {
+    color: @color-default !important;
+    background-color: @color-select !important;
+}
+.clickable-slim {
+    .clickable;
+    background-color: @color-text;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: @font-size-1;
+    padding-left: @padding-near-flex;
+    padding-right: @padding-near-flex;
+}
+.clickable-slim:hover {
+    color: @color-text;
+    background-color: @color-default;
+}
+
+.list-group-item {
+    padding: @padding-near;
+    font-family: @font-family-default;
+    font-size: @font-size-1;
+//    color: @color-main;
+    cursor: pointer;
+}
+.list-group-item:hover {
+    font-size: @scale-select;
+    font-weight: bold;
+}
+.highlight {
+    font-weight: bold;
+    background-color: @color-select;
+} 
+
+
+
+
+
+//CHAT
+.panel-group, .panel-group .chat-panel {
+    border-radius: 0;
+    margin: 0;
+    position: relative;
+}
+.panel-heading {
+    color: @color-text;
+    font-family: @font-family-default;
+}
+.panel-heading:hover {
+    color: @color-default !important;
+    background-color: @color-select !important;
+    cursor: pointer !important;    
+}
+.chat-content {
+    background-color: @color-text;
+    max-height: 4*@default-dimension;
+    min-height: 4*@default-dimension;
+    overflow-y: auto;
+}
+.message-input {
+    color: black;
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+}
+.message-name {
+    color: black;
+    font-size: @font-size-1/2;
+}
+.message {
+    width: 80%;
+    font-family: sans-serif;
+    padding: @padding-near;
+    border-radius: @padding-near;
+    word-wrap: break-word;
+}
+.their-message {
+    .message;
+    background-color: @color-select;
+    color: @color-default;
+    padding: @padding-near;
+    border-radius: @padding-near;
+}
+.my-message {
+    .message;
+    color: @color-text;
+    position: relative;
+    width: 80%;
+    left: 20%;
+}
+.chat-control {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: @font-size-1/2;
+    cursor: pointer;
+}
+.chat-control:hover {
+    color: @color-select;
+}
+.new-chat {
+    background-color: @color-alert !important;
+}
+
+
+
+
+
+//CURRENT SESSIONS
+#current-sessions {
+    .default-panel;
+    font-size: @font-size-1;
+}
+.chat-icon {
+    margin-bottom: 0.2*@font-size-1;
+}
+.unchattable-session {
+    color: @grey-3;
+}
+.list-heading {
+    font-size: @scale-select;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+//PAGE POSITIONING
+.top-right {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    top: @padding-near;
+    right: @padding-near;
+    text-align: center;
+    color: @color-text;
+}
+.top-left {
+    position: absolute;
+    display: flex;
+    top: @padding-far;
+    left: @padding-far;
+    text-align: center;
+}
+.top-left:hover {
+    color: @color-select;
+}
+
+.bottom-left {
+    width: 20%;
+    position: fixed;
+    bottom: @padding-near;
+    left: @padding-near;
+    margin: 0;
+}
+.bottom-right {
+    width: 20%;
+    position: fixed;
+    bottom: @padding-near;
+    right: @padding-near;
+    margin: 0;
+}
+.profile-pic {
+    position: relative;
+    height: @default-dimension;
+    width: @default-dimension;    
+    border-radius: 4*@padding-near;
+    flex: 1;
+}
+#exit {
+    text-align: center;
+    cursor: pointer;    
+    flex: 1;
+}
+#exit:hover {
+    color: @color-select;    
+}
+
+
+
+
+
+//SCROLLBARS
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: @color-select;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: @color-default;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+
+

@@ -1,0 +1,14 @@
+<div id="current-sessions" ng-show="loggedIn">
+    <div class="list-heading">Online</div>
+    <div ng-repeat="s in currentSessions">
+        
+<!--         ng-class="{'unchattable-session':!s.chattable}"-->
+        <div ng-show="$index < 5">{{playerName(s.playerId, true)}}
+            <span ng-show="s.active">*</span>
+            <span ng-show="s.active && inProgress">*</span> 
+            <span ng-show="s.chattable"><img class="chat-icon" width="8" height="8" ng-src="{{CHAT_ICON}}"></span>
+                
+        </div>
+        <div ng-show="$index === 5">...</div>
+    </div>
+</div>

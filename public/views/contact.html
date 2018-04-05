@@ -1,0 +1,35 @@
+<div id="contact" ng-controller="ContactController">
+    
+    <div class="clickable-slim" ng-style="{color:thisColor}" ng-click="openContact()">Report/Request
+    </div>
+    
+<!--CONTACT MODAL-->
+    <div class="modal fade center" data-keyboard="false" data-backdrop="static" show-modal="{{contacting}}">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" ng-show="!acknowledgeContact">What do you want?</h2>
+                    <h2 class="modal-title" ng-show="acknowledgeContact">Thank you!</h2>
+                </div>
+                <div class="modal-body" ng-show="!acknowledgeContact && contacting">
+                    <p>Your email: <input id="contact-email" type="text" ng-model="email" give-focus="{{contacting}}" get-focus="enterContact" delay="1000"></p><hr>
+                    <p>Bug report/feature request:</p><textarea id="contact-content" class="message" rows=4 ng-model="content"></textarea><hr>
+                    <div>
+                        <button class="btn clickable" ng-disabled="!isEmail(email) || content===''" ng-style="{'background-color':thisColor}" ng-click="submitContact()">
+                            Send 
+                        </button>
+                        <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-click="refreshContact()">
+                            Cancel 
+                        </button>
+                    </div>
+                </div>
+      
+                <div class="modal-body" ng-show="acknowledgeContact">
+                    <button class="btn clickable" id="refresh" ng-style="{'background-color':thisColor}" ng-click="refreshContact()" give-focus="{{acknowledgeContact}}" get-focus="completeContact">
+                        OK 
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>     

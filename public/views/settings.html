@@ -1,0 +1,89 @@
+<div class="setting-container" ng-controller="SettingsController"> 
+    <div class="left-side"></div>
+    <div class="setting-list">
+     
+        <div class="setting-entry">
+            <div>Name: </div>
+            <div ng-show="settingType !== 'name'">
+                <div class="setting-value">{{name}}  <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-show="settingType === ''" ng-click="set('name')">Change</button></div>
+            </div>
+            <div ng-show="settingType === 'name'">
+                <input id="name" type="text" size="12" ng-model="name" ng-keypress="setName($event)" 
+                give-focus="{{settingType === 'name'}}" get-focus="setName">
+                <button class="btn clickable" ng-disabled="name === '' || taken(name)" ng-style="{'background-color':thisColor}" ng-click="setName()">
+                    Confirm
+                </button>
+            </div>
+        </div>
+
+        
+        <div class="setting-entry">
+            <div>Password: </div>
+            <div class="setting-value" style="font-family:sans-serif" ng-show="settingType !== 'password'">
+                <div>********  <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-show="settingType === ''" ng-click="set('password')">Change</button></div>
+            </div>
+            <div ng-show="settingType === 'password'">
+                <input id="password" type="password" size="12" ng-model="password" ng-keypress="setPassword($event)" give-focus="{{settingType === 'password'}}" get-focus="setPassword">
+                <button class="btn clickable" ng-disabled="password === ''" ng-style="{'background-color':thisColor}" ng-click="setPassword()">
+                    Confirm
+                </button>
+            </div>
+        </div>
+
+        
+        <div class="setting-entry">
+            <div>Avatar: </div>
+            <div ng-show="thisId < pics[0].length"><img ng-src="{{pics[0][thisId]}}" class="selectable-pic" ng-class="{'selected-pic': pic === pics[0][thisId]}" ng-style="{'border-color':thisColor}" ng-click="setPic(pics[0][thisId])"></div>
+            <div ng-repeat="p in pics[1]"><img ng-src="{{p}}" class="selectable-pic" ng-class="{'selected-pic':p === pic}" ng-style="{'border-color':thisColor}" ng-click="setPic(p)"></div>
+        </div>
+                
+        
+        
+        <div class="setting-entry">
+            <div>Theme: </div>
+            <div ng-repeat="c in COLORS" class="selectable-pic" ng-class="{'selected-pic':$index === thisPlayer[1].colorIndex}" ng-style="{'background-color':COLORS[$index],'border-color':black}" ng-show="$index <= thisPlayer[1].level" ng-click="setColor($index)"></div>
+            <div ng-repeat="c in COLORS" class="selectable-pic" style="cursor:default;background-color:white" ng-class="{'selected-pic':$index === thisPlayer[1].colorIndex}" ng-show="$index > thisPlayer[1].level"><span style="color:black;font-size:10px">{{LEVEL_INCREMENT*($index-1)}}</span></div>
+        </div>
+        
+  
+
+        <div class="setting-entry" ng-show="featured()">
+            <div>Features: </div>
+            <div>
+                <span class="checkbox-unit" ng-click="setFeature('music')">
+                    <span class="checkbox-box">
+                        <span ng-style="{color:thisColor}" ng-show="enableMusic">■</span>
+                        <span style="{color:'black'}" ng-show="!enableMusic">□</span>
+                    </span>
+                    Music
+                </span>
+                <span class="checkbox-unit" ng-click="setFeature('chat')" ng-show="screenWidth() >= MEDIUM_WIDTH">
+                    <span class="checkbox-box">
+                        <span ng-style="{color:thisColor}" ng-show="enableChat">■</span>
+                        <span style="{color:'black'}" ng-show="!enableChat">□</span>
+                    </span>
+                    Chat
+                </span>
+            </div>
+        </div>  
+        
+
+        
+        <div class="setting-entry" ng-controller="ControlsController" ng-show="!isMobile">
+            <div>Controls: </div>
+            <div class="control-container" ng-repeat="i in defaultInputs">
+                <span class="control-label">{{i}}</span><input class="control-input" maxlength="1" size="1" ng-model="inputs[$index]" ng-keydown="setControl($index, $event)">
+            </div>
+        </div>
+
+        
+        <div class="setting-entry">
+            <div>Effects: </div>
+            <input type="range" min="0" max="1" step="0.1" sound-effect="setting" ng-value="{{volume}}" ng-model="volume" ng-change="setVolume()">
+        </div>      
+
+
+        
+    </div>
+    <div class="right-side"></div>
+</div>

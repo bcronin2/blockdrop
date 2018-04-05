@@ -1,0 +1,10 @@
+<div ng-controller="ControlsController" ng-show="!isMobile">
+    <button class="btn clickable" data-toggle="collapse" data-target="#controls" ng-style="{'background-color':thisColor}">
+        Controls
+    </button>
+    <div class="panel-collapse collapse" id="controls" ng-class="{in:screenHeight()>=MEDIUM_HEIGHT}">
+        <div class="control-container" ng-repeat="i in defaultInputs">
+            <span class="control-label">{{i}}</span><input class="control-input" maxlength="1" size="1" ng-model="inputs[$index]" ng-keydown="setControl($index, $event)">
+        </div>
+    </div>
+<hr></div>

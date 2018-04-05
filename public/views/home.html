@@ -1,0 +1,8 @@
+<div class="main-menu" ng-show="loggedIn" ng-style="{color:thisColor}">
+    <div class="menu-link" ui-sref="solo">Solo</div>
+    <div class="menu-link-dead" ng-show="currentSessions.length <= 1 || activeSessions >= 4 || inProgress">Multiplayer</div>
+    <div class="menu-link" ui-sref="multi" ng-show="currentSessions.length > 1 && activeSessions < 4 && !inProgress">Multiplayer</div>
+    <div class="menu-link" ui-sref="records" ng-show="screenWidth() >= SMALL_WIDTH">Records</div>
+    <div class="menu-link" ui-sref="settings" ng-show="screenWidth() >= SMALL_WIDTH">Settings</div>
+</div>
+

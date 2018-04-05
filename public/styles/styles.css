@@ -1,0 +1,515 @@
+@font-face {
+  font-family: ARCADECLASSIC;
+  src: url("../fonts/ARCADECLASSIC.ttf");
+}
+html {
+  height: 100vh;
+}
+body {
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: lightgray;
+}
+footer {
+  height: 50px;
+  line-height: 50px;
+  font-family: ARCADECLASSIC;
+  text-align: center;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: ARCADECLASSIC;
+  text-align: center;
+}
+p {
+  font-size: 16px;
+  margin: 0;
+}
+input,
+textarea {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: grey;
+  resize: none;
+}
+input[type=range] {
+  width: 40%;
+}
+.jumbotron {
+  height: 100px;
+  padding: 0;
+  font-family: "ARCADECLASSIC";
+  font-size: 64px;
+  text-align: center;
+  color: white;
+}
+.title {
+  cursor: pointer;
+}
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+  font-family: ARCADECLASSIC;
+  font-size: 48px;
+}
+.menu-link {
+  cursor: pointer;
+}
+.menu-link:hover {
+  color: silver;
+}
+.menu-link-dead {
+  color: darkgray;
+}
+.content {
+  display: flex;
+  flex: 12;
+}
+#game-console {
+  display: flex;
+  flex-grow: 1;
+}
+.left-side,
+.right-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2.5%;
+}
+.right-side {
+  text-align: center;
+}
+#game-panel {
+  text-align: center;
+  font-family: ARCADECLASSIC;
+  font-size: 32px;
+  background-color: darkgray;
+  border: double;
+  border-radius: 0;
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+}
+#game-top {
+  font-size: 16px;
+  height: 50px;
+  display: flex;
+}
+#game-content {
+  flex: 12;
+  display: flex;
+}
+.player-frame {
+  flex: 1;
+  display: flex;
+  padding: 0 2.5% 2.5% 2.5%;
+}
+.player-content {
+  text-align: center;
+  font-family: ARCADECLASSIC;
+  font-size: 32px;
+  background-color: darkgray;
+  border: double;
+  border-radius: 0;
+  flex: 1;
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+}
+.streak-frame {
+  height: 10px;
+  border-radius: 0;
+  background-color: white;
+}
+.streak-progress {
+  height: 100%;
+}
+.block-region {
+  display: flex;
+  justify-content: flex-start;
+  flex: 12;
+}
+.block-stack {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-around;
+  align-items: center;
+  flex: 2;
+}
+.block-icon {
+  margin: auto;
+  display: block;
+  color: white;
+}
+.buffer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.this {
+  border-width: 4px;
+}
+.player-pic {
+  width: 60%;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 2.5%;
+}
+.default-panel {
+  text-align: center;
+  font-family: ARCADECLASSIC;
+  font-size: 32px;
+  background-color: darkgray;
+  border: double;
+  border-radius: 0;
+}
+.player-list {
+  text-align: center;
+  font-family: ARCADECLASSIC;
+  font-size: 32px;
+  background-color: darkgray;
+  border: double;
+  border-radius: 0;
+  font-size: 16px;
+  width: 25%;
+  position: relative;
+}
+.mobile-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+.control-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.control-label {
+  flex: 1;
+  left: 5px;
+  font-family: ARCADECLASSIC;
+  font-size: 16px;
+}
+.control-input {
+  flex: 1;
+}
+.record-container {
+  width: 100%;
+  display: flex;
+}
+.record-list {
+  flex: 2;
+}
+.record-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 38.4px;
+  color: grey;
+  font-family: ARCADECLASSIC;
+  font-size: 32px;
+  padding: 5px;
+  border: solid black;
+  border-width: 0px 2px 2px 2px;
+}
+.record-headers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 38.4px;
+  color: grey;
+  font-family: ARCADECLASSIC;
+  font-size: 32px;
+  padding: 5px;
+  border: solid black;
+  border-width: 0px 2px 2px 2px;
+  color: black;
+  border-width: 2px;
+}
+.setting-container {
+  width: 100%;
+  display: flex;
+}
+.setting-list {
+  flex: 2;
+}
+.setting-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 38.4px;
+  color: grey;
+  font-family: ARCADECLASSIC;
+  font-size: 32px;
+  padding: 5px;
+  border: solid black;
+  border-width: 0px 2px 2px 2px;
+  color: black;
+  height: 50px;
+  border-width: 0;
+}
+.setting-value {
+  color: grey;
+}
+.selectable-pic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 22.5px;
+  width: 22.5px;
+  cursor: pointer;
+}
+.selected-pic {
+  border: solid;
+  border-width: 4px;
+}
+.checkbox-unit {
+  font-size: 25.6px;
+  cursor: pointer;
+}
+.checkbox-box {
+  padding-left: 10px;
+  padding-right: 2.5px;
+}
+.modal-dialog,
+.modal-content {
+  width: 320px;
+  border-radius: 0;
+}
+.modal-open .modal {
+  height: 80%;
+  width: 320px;
+  overflow-y: hidden;
+}
+.center {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -40%);
+  text-align: center;
+}
+.whole-page {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -40%);
+  text-align: center;
+  padding: 25px;
+  font-family: ARCADECLASSIC;
+  font-size: 64px;
+  color: white;
+  background-color: darkred;
+}
+.urgent {
+  color: white;
+  background-color: red;
+}
+.clickable {
+  font-family: ARCADECLASSIC;
+  color: white;
+  border-radius: 0;
+  margin: auto;
+  cursor: pointer;
+}
+.clickable:focus {
+    color: darkgrey;
+}
+.clickable:hover {
+  color: grey !important;
+  background-color: silver !important;
+}
+.clickable-slim {
+  font-family: ARCADECLASSIC;
+  color: white;
+  border-radius: 0;
+  margin: auto;
+  cursor: pointer;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  height: 16px;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+}
+.clickable-slim:hover {
+  color: white;
+  background-color: grey;
+}
+.list-group-item {
+  padding: 5px;
+  font-family: ARCADECLASSIC;
+  font-size: 16px;
+  cursor: pointer;
+}
+.list-group-item:hover {
+  font-size: 120%;
+  font-weight: bold;
+}
+.highlight {
+  font-weight: bold;
+  background-color: silver;
+}
+.panel-group,
+.panel-group .chat-panel {
+  border-radius: 0;
+  margin: 0;
+  position: relative;
+}
+.panel-heading {
+  color: white;
+  font-family: ARCADECLASSIC;
+}
+.panel-heading:hover {
+  color: grey !important;
+  background-color: silver !important;
+  cursor: pointer !important;
+}
+.chat-content {
+  background-color: white;
+  max-height: 200px;
+  min-height: 200px;
+  overflow-y: auto;
+}
+.message-input {
+  color: black;
+  width: 100%;
+  resize: none;
+  overflow: hidden;
+}
+.message-name {
+  color: black;
+  font-size: 8px;
+}
+.message {
+  width: 80%;
+  font-family: sans-serif;
+  padding: 5px;
+  border-radius: 5px;
+  word-wrap: break-word;
+}
+.their-message {
+  width: 80%;
+  font-family: sans-serif;
+  word-wrap: break-word;
+  background-color: silver;
+  color: grey;
+  padding: 5px;
+  border-radius: 5px;
+}
+.my-message {
+  font-family: sans-serif;
+  padding: 5px;
+  border-radius: 5px;
+  word-wrap: break-word;
+  color: white;
+  position: relative;
+  width: 80%;
+  left: 20%;
+}
+.chat-control {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 8px;
+  cursor: pointer;
+}
+.chat-control:hover {
+  color: silver;
+}
+.new-chat {
+  background-color: darkred !important;
+}
+#current-sessions {
+  text-align: center;
+  font-family: ARCADECLASSIC;
+  font-size: 32px;
+  background-color: darkgray;
+  border: double;
+  border-radius: 0;
+  font-size: 16px;
+}
+.chat-icon {
+    margin-bottom: 3.2px;
+}
+.unchattable-session {
+  color: grey;
+}
+.list-heading {
+  font-size: 120%;
+  font-weight: bold;
+}
+.top-right {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  top: 5px;
+  right: 5px;
+  text-align: center;
+  color: white;
+}
+.top-left {
+  position: absolute;
+  display: flex;
+  top: 25px;
+  left: 25px;
+  text-align: center;
+}
+.top-left:hover {
+  color: silver;
+}
+.bottom-left {
+  width: 20%;
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+  margin: 0;
+}
+.bottom-right {
+  width: 20%;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  margin: 0;
+}
+.profile-pic {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  border-radius: 20px;
+  flex: 1;
+}
+#exit {
+  text-align: center;
+  cursor: pointer;
+  flex: 1;
+}
+#exit:hover {
+  color: silver;
+}
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background-color: silver;
+}
+::-webkit-scrollbar-thumb {
+  background-color: grey;
+}
+::-webkit-scrollbar-button {
+  display: none;
+}

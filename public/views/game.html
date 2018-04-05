@@ -1,0 +1,131 @@
+<div id="game-console" ng-controller="GameController">
+    
+<!--LEFT SIDE-->
+        <div class="left-side">
+            <div class="panel default-panel" sound-effect="timer" ng-class="{urgent:timer<=10}" ng-value="{{timer}}" ng-show="inGame()">{{timer}}</div>
+            <div id="setup" ng-show="!gameOn()">
+                <div ng-include="'views/controls.html'"></div>
+                <div ng-include="'views/gametype.html'"></div>
+            </div>
+        </div>
+
+<!--GAME PANEL-->
+        <div id="game-panel">
+            <div id="game-top">
+                <button class="btn clickable" style="color:black" ng-disabled="true" ng-show="activeSessions <= 1 && multi && !gameOn()">
+                    Waiting for opponent...
+                </button>
+                <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-show="!gameOn() && !(multi && activeSessions <= 1)" ng-click="begin()" give-focus="{{timer === maxTime}}" get-focus="ready">
+                    Play
+                </button>
+                <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-show="gameOn()" ng-click="refreshGame()">
+                    Stop
+                </button>
+            </div>
+            <div id="game-content" listen="{{inGame() && !frozen}}">
+                
+<!--USER SCREEN-->
+                <div class="player-frame">
+                    <div class="player-content">
+                        <div class="streak-frame">
+                            <div class="streak-progress" ng-style="{width:streakProgress(),'background-color':thisColor}"></div>
+                        </div>
+                        <div class="block-region">
+                            <div class="buffer">
+                                <p ng-show="multi">You</p>
+                                <img class="player-pic" ng-src="{{thisPlayer[0].pic}}" ng-show="multi">
+                                <div sound-effect="simple" ng-value="{{score}}">{{score}}</div>
+                            </div>
+                            <div class="block-stack" sound-effect="special" ng-value="{{score}}">     
+                                <div class="buffer" style="order:-1"></div>
+                                    <div block ng-repeat="b in blocks" ng-style="{order:$index}" ng-value="{{blocks[$index].value}}">
+                                        <span class="block-icon glyphicon" style="font-size:50%" ng-class="blockDetails[blocks[$index].value].icon"></span>             
+                                    </div>
+                                <div class="buffer" style="order:100"></div>
+                            </div>
+                            <div class="buffer" ng-show="!multi || isMobile"></div>
+                        </div>
+                        <div class="mobile-buttons" ng-show="isMobile">
+                            <button class="btn btn-default" ng-click="processPress(2)" ng-show="isLevel(1)">
+                                <span class="glyphicon glyphicon-arrow-left"></span>
+                            </button>
+                            <button class="btn btn-default" ng-click="processPress(1)">
+                                <span class="glyphicon glyphicon-arrow-down"></span>
+                            </button>
+                            <button class="btn btn-default" ng-click="processPress(0)">
+                                <span class="glyphicon glyphicon-arrow-up"></span>
+                            </button>
+                            <button class="btn btn-default" ng-click="processPress(3)" ng-show="isLevel(1)">
+                                <span class="glyphicon glyphicon-arrow-right"></span>
+                            </button>
+                        </div>
+                    </div>                
+                </div>  
+
+                
+<!--OPPONENT STACKS, ONLY SHOW IF LARGE SCREEN -->
+                <div class="player-frame" ng-repeat="s in currentSessions" ng-show="multi && s.active && s.playerId !== thisId && screenWidth() >= MEDIUM_WIDTH">
+                    <div class="player-content">
+                        <div class="streak-frame" style="opacity:0"></div>
+                        <div class="block-region">
+                            
+                            <div class="buffer">
+                                <p>{{playerName(s.playerId, false)}}</p>
+                                <img class="player-pic" ng-src="{{players[s.playerId].pic}}">
+                                <div>{{s.score}}</div>
+                            </div>
+<!--BLOCKS -->
+                            <div class="block-stack">
+                                <div class="buffer" style="order:-1"></div>
+                                
+                                <div block style="opacity:0.5" ng-repeat="b in s.stack" ng-style="{order:$index}" ng-value="{{s.stack[$index].value}}">
+                                    <span class="block-icon glyphicon" style="font-size:50%" ng-class="blocks[s.stack[$index].value].icon"></span>
+                                </div>
+                                
+                                <div class="buffer" style="order:100"></div>
+                            </div>                                
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+        </div>  
+    
+<!--RIGHT SIDE-->
+        <div class="right-side">
+            <div ng-repeat="s in currentSessions" ng-show="multi && s.active && s.playerId != thisId && screenWidth() < MEDIUM_WIDTH">
+                <div class="buffer">
+                    <p>{{playerName(s.playerId, false)}}</p>
+                    <img class="player-pic" ng-src="{{players[s.playerId].pic}}">
+                    <p>{{s.score}}</p>
+                </div>
+            </div>
+        </div>
+
+<!--ALERTS-->
+        <div class="whole-page" ng-show="preGame()">{{countoff[timer - duration - 1]}}</div>
+        <div class="whole-page" sound-effect="frozen" ng-show="frozen" ng-value="{{frozen}}">Frozen</div>
+
+<!--GAME END MODAL-->
+        <div class="modal fade center" data-keyboard="false" data-backdrop="static" show-modal="{{timer === 0}}">
+            <div class="modal-dialog modal-sm" ng-show="postGame()">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Game Over</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p class="this" ng-style="{color:thisColor}"><span ng-show="multi">You: </span>{{score}}</p>
+                        <div ng-show="multi">                     
+                            <div ng-repeat="s in currentSessions" ng-show="s.active && s.playerId !== thisId">
+                                <p>{{playerName(s.playerId, true)}}: {{s.score}}</p>
+                            </div>
+                        </div>
+                        <canvas graph-game="{{postGame()}}"></canvas>
+                        <button class="btn clickable" data-dismiss="modal" ng-style="{'background-color':thisColor}" ng-click="refreshGame()" give-focus="{{postGame()}}" get-focus="postGame">
+                            OK 
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+    

@@ -1,0 +1,48 @@
+<div class="record-container" ng-controller="RecordsController">
+    <div class="left-side">
+        <div id="setup">
+            <div>
+                <button class="btn clickable" data-toggle="collapse" data-target="#record-type-list" ng-style="{'background-color':thisColor}">
+                    Type
+                </button>
+                <div class="collapse" id="record-type-list" ng-class="{in:screenHeight()>=MEDIUM_HEIGHT}">
+                    <ul class="list-group">
+                        <li class="list-group-item" name="game-type" ng-class="{highlight:isType(0)}" ng-style="{color:thisColor}" ng-click="setType(0)">All</li>
+                        <li class="list-group-item" name="game-type" ng-class="{highlight:isType(1)}" ng-style="{color:thisColor}" ng-click="setType(1)">Personal</li>
+                        <li class="list-group-item" name="game-type" ng-class="{highlight:isType(2)}" ng-style="{color:thisColor}" ng-click="setType(2)">Illegitimate</li>                        
+                    </ul>
+                </div>
+            </div><hr>
+            <div ng-include="'views/gametype.html'"></div>
+            
+        </div>
+    </div>
+    <div class="record-list">
+        <div class="record-headers">
+            <div>Name</div>
+            <div>Score</div>
+        </div>
+        <div ng-repeat="r in allRecords[level][duration]" ng-show="recordType === 0"  ng-show="areRecords()">
+            <div class="record-entry">
+                <div>{{playerName(r.playerId, false)}}</div>
+                <div>{{r.score}}</div>
+            </div>
+        </div>
+        <div ng-repeat="r in personalRecords[level][duration]" ng-show="recordType === 1 && r.score <= 6500"  ng-show="areRecords()">
+            <div class="record-entry">
+                <div>{{playerName(r.playerId, false)}}</div>
+                <div>{{r.score}}</div>
+            </div>
+        </div>
+        <div ng-repeat="r in illegitimateRecords[level][duration]" ng-show="recordType === 2"  ng-show="areRecords()">
+            <div class="record-entry">
+                <div>{{playerName(r.playerId, false)}}</div>
+                <div>{{r.score}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="whole-page" ng-show="!areRecords() && !isType(2)">    
+        None yet...
+    </div>
+    <div class="right-side"></div>
+</div>

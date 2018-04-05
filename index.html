@@ -1,0 +1,72 @@
+<!--detect chat visibility-->
+<!--simplify controller objects-->
+
+
+<!DOCTYPE html>
+<html ng-app="blockDrop" ng-controller="GlobalController" ng-click="clickReset()" ng-keydown="keyReset($event)">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0">
+        
+        <title>Drop Blocks</title>
+        <meta name="description" content="The best game ever in webapp form.">
+        
+        <link href="images/site-icon.png" rel="icon">
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="styles/styles.css" rel="stylesheet">
+        
+    </head>
+    
+    <body chattability>
+        <div class="jumbotron ng-hide" ng-style="{'background-color': thisColor}" ng-show="screenHeight() >= SMALL_HEIGHT">
+            <div class="title" ui-sref="home">
+                <span ng-show="screenWidth() >= SMALL_WIDTH">DROP BLOCKS</span>
+                <span ng-show="screenWidth() < SMALL_WIDTH">■drop</span>
+            </div>
+        </div>
+        
+        <div class="main-menu menu-link ng-hide" ui-sref="home" ng-show="screenHeight() < SMALL_HEIGHT">
+            <span ng-show="screenWidth() >= SMALL_WIDTH">DROP BLOCKS</span>
+            <span ng-show="screenWidth() < SMALL_WIDTH">■drop</span>
+        </div>
+        
+        <div ui-view="cover"></div>
+        
+        <div ui-view="nav" ng-show="navigable()"></div>
+        
+        <div class="content" ui-view="content"></div>
+        
+        <div class="bottom-left" ng-include="'views/music.html'" ng-show="musicable() && loggedIn"></div>
+        
+        <div class="bottom-right panel-group">
+            <div ng-include="'views/chat.html'" ng-show="chattable() && loggedIn"></div>
+            <div ng-include="'views/currentsessions.html'"></div>
+        </div>
+
+        <div class="top-right ng-hide" ng-show="loggedIn && screenHeight() >= SMALL_HEIGHT">
+            <p>You are {{thisPlayer[0].name}}.</p>
+            <img class="profile-pic" ng-src="{{thisPlayer[0].pic}}" >
+            <p id="exit" ng-click="resetSession(true)">Log out</p>
+        </div>
+        <footer> </footer>
+        <div ng-include="'views/contact.html'" ng-show="helpable() && loggedIn"></div>
+        
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>        
+        <script src="scripts/app.js"></script>
+        <script src="scripts/services.js"></script>
+        <script src="scripts/directives.js"></script>
+        <script src="scripts/controllers.js"></script>
+        
+    </body>
+</html>
+
+

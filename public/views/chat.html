@@ -1,0 +1,26 @@
+<div ng-controller="ChatController" class="panel">
+    <div class="panel-heading" ng-style="{'background-color':thisColor}" ng-class="{'new-chat':chatAlert()}">
+        <div class="panel-title">
+            <div data-toggle="collapse" data-target="#chat-pane" ng-click="activateMessage()">Chat</div>
+        </div>
+    </div>
+    <div class="panel-collapse collapse" id="chat-pane">
+        <div class="panel-body chat-content" scrolldown> 
+            <div ng-repeat="m in messages">
+                <div ng-show="m.playerId != thisId">
+                    <div class="message-name">{{players[m.playerId].name}}</div>
+                    <div class="their-message">{{m.content}}</div>
+                </div>
+                <div class="my-message" ng-style="{'background-color':thisColor}" ng-show="m.playerId === thisId">
+                    {{m.content}}
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <textarea class="message-input" rows="2" ng-model="content" ng-keydown="keystroke($event)" get-focus="activeMessage"></textarea>
+
+        </div>
+    </div>
+</div>
+
+

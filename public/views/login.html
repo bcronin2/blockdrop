@@ -1,0 +1,114 @@
+
+<!--LOGIN MODALS-->        
+<div>
+
+    <div class="modal fade center" data-keyboard="false" data-backdrop="static" show-modal="{{!loggedIn}}">
+        <div class="modal-dialog modal-sm" ng-show="players.length > 0">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" ng-show="!inUse && !forgotPassword">Greetings<span ng-show="thisId >= 0">, {{thisPlayer[0].name}}</span></h2>
+                    <h2 class="modal-title" ng-show="inUse">Sorry</h2>
+                    <h2 class="modal-title" ng-show="forgotPassword">Password Retrieval</h2>        
+                </div>
+                
+                
+                <div class="modal-body" ng-show="enterShortcut()">
+                    <p>Are you {{players[$storage.id].name}}?</p>
+                    <button class="btn clickable" id="shortcut" ng-style="{'background-color':thisColor}" ng-click="shortcut()" give-focus="{{enterShortcut()}}" get-focus="init" delay="200">
+                        Yes
+                    </button>
+                    <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-click="changePlayer()">
+                        No
+                    </button> 
+                </div>
+                
+                
+                <div class="modal-body" ng-show="enterName()">
+                    <p>Who are you?</p>
+                    <p>Name: <input id="name" list="names" size="12" maxlength="12" ng-model="$parent.name" ng-keypress="establishId($event)" give-focus="{{enterName()}}" get-focus="init" delay="200"></p>
+                    <datalist id="names">
+                        <option ng-repeat="p in players" value="{{p.name}}">
+                    </datalist>
+                    <button class="btn clickable" ng-disabled="$parent.name === '' || matchName() < 0" ng-style="{'background-color':thisColor}" ng-click="establishId()">
+                        OK
+                    </button>   
+                    <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-click="newPlayer('#new-name')">
+                        I'm new
+                    </button>
+                </div>
+                
+            
+                
+                <div class="modal-body" ng-show="enterNew()">
+                    <p>What's your name?</p>
+                    <p><input id="new-name" type="text" size="12" maxlength="12" ng-model='$parent.name' ng-keypress="createPlayer($event)" give-focus="{{enterNew()}}" get-focus="newName"></p>
+                    <button class="btn clickable" ng-disabled="$parent.name === '' || matchName() >= 0" ng-style="{'background-color':thisColor}" ng-click="createPlayer()">
+                        Submit
+                    </button>
+                    <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-click="resetSession()">
+                        Cancel
+                    </button> 
+                </div>
+                
+                
+                                
+                <div class="modal-body" ng-show="inUse">
+                    <p>This player is already logged in. Choose another.</p>
+                    <button class="btn clickable" id="change-player" ng-style="{'background-color':thisColor}" ng-click="resetSession()" give-focus="{{inUse}}" get-focus="inUse">
+                        OK
+                    </button>
+                </div>
+                
+                
+                
+                
+                <div class="modal-body" ng-show="enterPassword()">
+                    <div ng-show="thisPlayer[1].password === ''">
+                        <p>Create a very simple password.</p>
+                    </div>
+                    <div>
+                        <p>Password: <input id="password" type="password" size="12" ng-model="$parent.password" ng-keypress="validate($event)" give-focus="{{enterPassword()}}" get-focus="enterPassword"></p>
+
+                        <button class="btn clickable" ng-disabled="password === ''" ng-style="{'background-color':thisColor}" ng-click="validate()">
+                            Submit
+                        </button>   
+                        <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-click="resetSession()">
+                            Cancel
+                        </button>
+                        <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-show="thisPlayer[1].password !== ''" ng-click="emailReminder()">
+                            I Forgot
+                        </button>
+                    </div>
+                </div>
+                
+                 
+                
+                
+
+                
+                
+                
+                <div class="modal-body" ng-show="enterRetrieval()">
+                    <p>Enter your email address to retrieve your password.</p>
+                    <p>Email address: <input id="email" type="text" size="12" ng-model="$parent.email" ng-keypress="sendPassword($parent.email, $event)" give-focus="{{enterRetrieval()}}" get-focus="enterRetrieval"></p>
+                    <button class="btn clickable" ng-disabled="$parent.email === '' || !isEmail($parent.email)" ng-style="{'background-color':thisColor}" ng-click="sendPassword($parent.email)">
+                        Submit
+                    </button>
+                    <button class="btn clickable" ng-style="{'background-color':thisColor}" ng-click="resetSession()">
+                        Cancel
+                    </button> 
+                </div>
+                
+                <div class="modal-body" ng-show="passwordSent">
+                    <p>Your password has been sent.</p>
+                    <button class="btn clickable" id="acknowledge" ng-style="{'background-color':thisColor}" ng-click="resetSession()" give-focus="{{passwordSent}}" get-focus="passwordSent">
+                        OK
+                    </button> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+               

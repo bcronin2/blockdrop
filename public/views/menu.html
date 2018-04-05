@@ -1,0 +1,10 @@
+<div class="top-left" ng-style="{color:thisColor}">
+    <button class="btn clickable dropdown-toggle" data-toggle="dropdown" ng-style="{'background-color':thisColor}"><span class="glyphicon glyphicon-chevron-down"></span></button>
+        <ul class="dropdown-menu">
+            <li class="list-group-item" name="page" ng-class="{highlight:isState('home')}" ui-sref="home">Home</li>
+            <li class="list-group-item" name="page" ng-class="{highlight:isState('solo')}" ui-sref="solo">Solo</li>
+            <li class="list-group-item" name="page" ng-class="{highlight:isState('multi')}" ui-sref="multi" ng-show="currentSessions.length > 1 && activeSessions < 4 && !inProgress">Multiplayer</li>
+            <li class="list-group-item" name="page" ng-class="{highlight:isState('records')}" ui-sref="records" ng-show="screenWidth() >= SMALL_WIDTH">Records</li>
+            <li class="list-group-item" name="page" ng-class="{highlight:isState('settings')}" ui-sref="settings" ng-show="screenWidth() >= SMALL_WIDTH">Settings</li>
+        </ul>
+</div>

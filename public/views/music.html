@@ -1,0 +1,23 @@
+<div ng-controller="MusicController">
+    <div class="btn-group">
+            <button class="btn btn-default" ng-click="prevMusic()">
+                <span class="glyphicon glyphicon-fast-backward"></span>
+            </button>
+            <button class="btn btn-default" ng-hide="playing" ng-click="playPause()">
+                <span class="glyphicon glyphicon-play"></span>
+            </button>
+            <button class="btn btn-default" ng-show="playing" ng-click="playPause()">
+                <span class="glyphicon glyphicon-pause"></span>
+            </button>
+            <button class="btn btn-default" ng-click="nextMusic()">
+                <span class="glyphicon glyphicon-fast-forward"></span>
+            </button>
+    </div> 
+    <button class="btn clickable" data-toggle="collapse" data-target="#music-list" ng-style="{'background-color':thisColor}" ng-show="screenWidth() >= MEDIUM_WIDTH">...</button>
+        <div class="collapse" id="music-list">
+            <ul class="list-group" id="playlist">
+                <li class="list-group-item" ng-repeat="m in musics" ng-class="{highlight:isCurrent($index)}" ng-style="{color:thisColor}" ng-click="setMusic($index)">{{m.name}}</li>
+            </ul>
+        </div>              
+    <audio play-music="{{playing}}" ng-value="{{musicId}}" ng-src="{{musics[musicId].source}}"></audio>
+</div>

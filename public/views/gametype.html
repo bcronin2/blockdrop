@@ -1,0 +1,25 @@
+<div>
+    <button class="btn clickable" data-toggle="collapse" data-target="#level-list" ng-style="{'background-color':thisColor}">
+        Level
+    </button>
+    <div class="collapse" id="level-list" ng-class="{in:screenHeight()>=MEDIUM_HEIGHT}">
+        <ul class="list-group">
+            <li class="list-group-item" name="level" ng-class="{highlight:isLevel(0)}" ng-style="{color:thisColor}" ng-click="setLevel(0)">Simple</li>
+            <li class="list-group-item" name="level" ng-class="{highlight:isLevel(1)}" ng-style="{color:thisColor}" ng-click="setLevel(1)">Super</li>
+        </ul>
+    </div>
+</div><hr>
+<div>
+    <button class="btn clickable" data-toggle="collapse" data-target="#duration-list" ng-style="{'background-color':thisColor}">
+        Duration
+    </button>
+    <div class="collapse" id="duration-list" ng-class="{in:screenHeight()>=MEDIUM_HEIGHT}">
+        <ul class="list-group">
+            <li class="list-group-item" name="duration" ng-class="{highlight:isDuration(0)}" ng-style="{color:thisColor}" ng-click="setDuration(0)">30</li>
+            <li class="list-group-item" name="duration" ng-class="{highlight:isDuration(1)}" ng-style="{color:thisColor}" ng-click="setDuration(1)">60</li>
+            <li class="list-group-item" name="duration" ng-class="{highlight:isDuration(2)}" ng-style="{color:thisColor}" ng-click="setDuration(2)">120</li>
+        </ul>
+    </div>
+</div>
+
+                
